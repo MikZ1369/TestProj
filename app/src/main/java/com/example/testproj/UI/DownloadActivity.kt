@@ -39,6 +39,7 @@ class DownloadActivity: AppCompatActivity() {
         val buttonDelete = findViewById<Button>(R.id.delete_button)
         if (getFile().exists()) {
             buttonDelete.visibility = View.VISIBLE
+            buttonDownload.visibility = View.GONE
         }
         bundle?.getString("name")?.let { nameTextView.text = it }
         bundle?.getInt("id")?.let { id = it }
@@ -61,12 +62,14 @@ class DownloadActivity: AppCompatActivity() {
             if (isStoragePermissionGranted()) {
                 saveImage()
                 buttonDelete.visibility = View.VISIBLE
+                buttonDownload.visibility = View.GONE
             }
         }
         buttonDelete.setOnClickListener {
             if (isStoragePermissionGranted()) {
                 deleteImage()
                 buttonDelete.visibility = View.GONE
+                buttonDownload.visibility = View.VISIBLE
             }
         }
     }
